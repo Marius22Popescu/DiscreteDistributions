@@ -1,0 +1,95 @@
+---
+title: "Lab #__ solution"
+author: "YOUR (GROUP) NAME(S) HERE"
+date: "DATE OF THE LAB HERE"
+output: html_document
+---
+
+<!-- This is just the options for setup. Leave it be.-->
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents with embedded code. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars} 
+# This is a comment in R. The `cars' is unnecessary: it's letting R know that this code uses the cars package
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r}
+x=0:10
+y=x^2
+plot(x,y)
+```
+
+
+If you want a plot without the code generating it shown, you can add the `echo = FALSE` parameter to the code chunk to prevent printing of the R code, and just print the output.
+
+```{r, echo=FALSE}
+x=seq(0,2*pi,pi/10)
+y=sin(x)
+plot(x,y)
+```
+
+
+## Including Mathematics/Equations
+
+You can also embed equations using LaTeX syntax by putting the equation inside \$ symbols: \$ EQUATION HERE \$. I'll provide most of the formatting you need for equations in the labs, but if you want more guidance , see <http://reu.dimacs.rutgers.edu/Symbols.pdf>.
+
+
+An example: 
+Single \$ symbols will produce an equation $y^2=\frac{43}{x}$ in line with the text.
+
+Whereas double \$ symbols will put your mathematics on a new line: $$ \sum_{i=1}^n \frac{(X_i-\bar{X})^2}{n-1}$$
+
+
+## Formatting for your lab solutions
+
+
+You will probably want to use the console to play around and find your solutions, but when you are happy with them, you will include your code chunks for each task into this document.
+
+For each lab, first ensure you update the lab \#, the names of all of group members for the lab, and the date of the lab.
+
+
+[Suppose Task 1 of the lab is to create a plot of the equation $y=\sin(x)$ on the interval $[-2\pi,2\pi]$ and describe how you did it. You'd embed up your solution, including any written up explanation, description, analysis, or summaries in the following manner.]
+
+## Task 1 Solution:
+
+First I created a vector **x** of values in the domain. I chose to have my values increment by 0.01 to keep the points close to each other.
+```{r}
+x=seq(-2*pi,2*pi,0.01)
+
+```
+
+Then I created a vector **y** of the sin(x) values:
+```{r}
+y=sin(x)
+```
+
+Then I built the plot:
+```{r}
+plot(x,y)
+```
+
+
+
+
+When you are done (or if you want to check your progress so far) click on 'Knit' on the top menu, or use the (Windows) shortcut Ctrl-Shift-K.
+
+The resulting HTML document will be your submission to the lab assignment on CANVAS. Change the file name to 'LAB#_-YOURLASTNAME' and then upload it.
+
+Generally speaking, the labs will be due on Tuesday the week following the lab.
+
+
+
+

@@ -1,0 +1,203 @@
+---
+title: "Lab #1 solution"
+author: "Marius Popescu"
+date: "04.10.2017"
+output: html_document
+---
+
+<!-- This is just the options for setup. Leave it be.-->
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Task 1
+
+```{r} 
+# First I created the "x" vector of the square roots between 9 and 36
+x=sqrt(9:36)
+x
+# Then I created the vector "y" that is the summ of "X"
+y=sum(x)
+y
+# Then I created the vector "z" that is mean of the vector "x"
+z=mean(x)
+z
+# Then I created the vector "w" that is sin of the 13th entry of "x"
+w=sin(x)[13]
+w
+```
+
+
+## Task 2
+
+
+First I created a vector "x" with the elements from 1 to 20
+```{r}
+x=1:20
+x
+```
+Then I created the matrix y with 5 rows and 4 columns
+```{r}
+y = matrix(x,nrow=5,ncol=4)
+y
+```
+In the row 4 and colomn 3 is located 14
+```{r}
+y[4,3]
+
+```
+Then I output the entrie on the 3rd row, second column.
+```{r}
+y[3,2]
+
+```
+Then I output the means of every row
+```{r}
+rowMeans(y)
+
+```
+Then I output the means of all columns
+```{r}
+colMeans(y)
+
+```
+The column means has a larger spread; because in the columns the numbers are in order and in rows are from 5 to 5.
+
+
+##Task 3
+
+
+First I created a sample "D8" to simulate the sum of rolling 8-sided die 1000 times and I computed the probability
+```{r}
+D8 =sample(1:8, 1000, replace = TRUE)
+y = sum(D8==8)/1000
+y
+
+```
+Then, I compared with the theoretical value
+```{r}
+x = 1/8
+x
+(1 - y/x)*100
+
+```
+The estimated probability is almoast the same like the theoretical value; the diference between those varies is in the range of 10%.
+
+The following table represent the number of outcome for each side of the die
+The second table shows the probability of each side of the die.
+```{r}
+table(D8)
+table(D8)/1000
+hist(D8)
+```
+This histogram represents the number of outcomes for the 8-sided die. 
+
+## Task 4
+
+
+First I created a sample "Dice" to simulate the outcome of rolling 6-sided die 1000 times.
+```{r}
+Dice =sample(1:6, 1000, replace = TRUE)
+```
+Then I created the vector "Coin" and the following command produces a sample of 1000 trials where one coin and one die are each randomized. 
+```{r}
+Coin = c("Heads", "Tails")
+D=data.frame(Dice,Coin)
+```
+The following command produces the sums of the events that the die is >= 4 and the coin is head. The next command produces the sums of the events that the die is >= 4 or the coin is tail.
+```{r}
+sum(D$Dice>=4 & D$Coin=="Heads")
+sum(D$Dice>=4 | D$Coin=="Tails")
+
+```
+The following comands will produce will produce a frquency and propotion table
+```{r}
+table(D)
+table(D)/1000
+```
+I create the vector "Tval" to calculate the theoretical value that a trial produces at least a 4 and a Head.
+```{r}
+Tval = 4/6 * 1/2
+Tval
+```
+I create the vector "Tstat" to calculate estimated probability that a trial produces at least a 4 and a Head.
+```{r}
+Tstat = sum(D$Dice>=4 & D$Coin=="Heads")/1000
+Tstat
+```
+Comparing statistical and theoretical value we can see that are prety similar. The diference is no mor than 10%
+```{r}
+Tstat - Tval
+(Tstat - Tval)*100
+```
+
+## Task 5
+
+
+I create the vector "WEATHER" that is a possible year's weather for a city and the vector "ACTIVITY" that are possible activities in one year.
+```{r}
+WEATHER=sample(c("sunny","overcast","rainy"),365, replace=TRUE, prob=c(0.2,0.45,0.35))
+ACTIVITY=sample(c("hiking","video games","study", "chores"),365, replace=TRUE, prob=c(0.1,0.3,0.5,0.1))
+D=data.frame(WEATHER,ACTIVITY)
+y = sum(D$WEATHER=="sunny" & D$ACTIVITY=="hiking")
+y 
+```
+The previous command (y) produces the sums of the events that the weather is sunny and you hike.
+Yes, this matches my expectation. 
+To compute the probability that a given day is both sunny and I hike, I created the vector "SH".
+```{r}
+SH = y/365
+SH
+```
+
+
+## Task 6
+
+
+a)
+Ω = The set of all sequences of n birthdays
+P(x) = 1/365^n
+
+b)
+A) subset a = all people from Ω that had the birthday in  the same day with me
+B) subset b = all people from Ω that had the birthday in  the same day with exactly other people from Ω
+C) subset b = all people from Ω that had the birthday in  the same day with exactly other two people from Ω
+
+c) P(A) = 1-P(A^c) = 1-(364/365)^n
+   If P(A) > 0.5 then 1-(364/365)^n > 0.5  then -(364/365)^n > - 0.5 then  0.5 > (364/365)^2
+   then log(0.5) > log 364/365
+   
+e)The following function will figure out if there are any duplicates in the list.
+```{r}
+t = 1:365
+trial = sample(t, 20, replace = TRUE)
+trial
+anyDuplicated(trial)
+
+```
+f)
+```{r}
+CountDuplicatedTrials<-function(npeople,ntrials){      #This is how you define a function in R-- npeople and ntrials are the inputs that a user specifies
+  nDuplicatedTrials=0         # Initializes a counter for the number of trials that have duplicates
+  for (i in 1:ntrials){        # This is a "for loop" it repeats the indented code over and over for each trial
+    y=sample(1:365,npeople,replace=TRUE)
+    if (anyDuplicated(y)){
+      nDuplicatedTrials=nDuplicatedTrials+1       #Increments the counter if a duplicate was found
+    }
+  }
+  nDuplicatedTrials/ntrials             # Prints the proportion of trials with duplicates
+}
+CountDuplicatedTrials(42, 10000)
+```
+ The smallest n for which P(B)>0.9 is 42 people.
+```{r}
+CountDuplicatedTrials(42, 30)
+
+```
+
+h) The probability of match the same birthday in real life is higher than in the statistical model because some people tend to plan the birthdays for they children. Other explanation can be that some periods of the year are more fertile like others. 
+
+
+
+THE END

@@ -1,0 +1,19 @@
+---
+title: "Lab #__ solution"
+author: "YOUR (GROUP) NAME(S) HERE"
+date: "DATE OF THE LAB HERE"
+output: html_document
+---
+
+<!-- This is just the options for setup. Leave it be.-->
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is some texts
+
+
+
